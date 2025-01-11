@@ -26,7 +26,7 @@
             border-radius: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        textarea, select, input, button {
+        textarea, input, button {
             width: 90%;
             margin: 10px auto;
             padding: 10px;
@@ -38,8 +38,8 @@
             outline: none;
             transition: border-color 0.3s ease;
         }
-        textarea:focus, select:focus, input:focus {
-            border-color: #808080; /* اللون عند التحديد */
+        textarea:focus, input:focus {
+            border-color: #808080;
         }
         textarea {
             height: 100px;
@@ -59,47 +59,62 @@
             margin-bottom: 20px;
             color: #2D83EC;
         }
-        .select-container {
+        .dropdown {
             position: relative;
-            display: inline-block;
             width: 90%;
+            margin: 10px auto;
         }
-        .custom-select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-color: #1c1c1c;
-            border: 1px solid #444;
-            border-radius: 30px;
+        .dropdown-button {
+            width: 100%;
             padding: 10px;
+            background-color: #1c1c1c;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 30px;
             font-size: 13px;
-            color: #fff;
+            text-align: left;
             cursor: pointer;
             outline: none;
+            transition: background-color 0.3s ease;
         }
-        .custom-select:focus {
-            border-color: #808080;
+        .dropdown-button:hover {
+            background-color: #2D83EC;
         }
-        /*.select-container::after {
-            content: '▼';
+        .dropdown-menu {
             position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            color: #808080;
-            pointer-events: none;
-            font-size: 12px;
-        }*/
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            z-index: 100;
+            display: none;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-item {
+            padding: 10px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-item:hover {
+            background-color: #2D83EC;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Feedback & Suggestions</h2>
-        <div class="select-container">
-            <select id="messageType" class="custom-select">
-                <option value="Complaint">Complaint</option>
-                <option value="Suggestion">Suggestion</option>
-            </select>
+        <div class="dropdown">
+            <button class="dropdown-button" id="dropdownButton">Select Message Type</button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="dropdown-item" onclick="selectOption('Complaint')">Complaint</div>
+                <div class="dropdown-item" onclick="selectOption('Suggestion')">Suggestion</div>
+            </div>
         </div>
         <textarea id="message" placeholder="Enter your feedback or suggestion here..."></textarea>
         <input id="username" type="text" placeholder="Telegram Username" disabled>
@@ -117,15 +132,34 @@
         document.getElementById("username").value = userData.username || "Not available";
         document.getElementById("userId").value = userData.id || "Not available";
 
+        // Dropdown menu logic
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('active');
+        });
+
+        function selectOption(option) {
+            dropdownButton.textContent = option;
+            dropdownMenu.classList.remove('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                dropdownMenu.classList.remove('active');
+            }
+        });
+
         // Send message function
         function sendMessage() {
             const message = document.getElementById("message").value.trim();
-            const messageType = document.getElementById("messageType").value;
+            const messageType = dropdownButton.textContent;
             const username = userData.username || "Not available";
             const userId = userData.id;
 
-            if (!message) {
-                tg.showAlert("Please enter your feedback or suggestion.");
+            if (!message || messageType === "Select Message Type") {
+                tg.showAlert("Please select a message type and enter your feedback.");
                 return;
             }
 
