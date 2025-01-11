@@ -6,7 +6,6 @@
     <title>Feedback & Suggestions</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        
         button, input, select, textarea, img, a {
     outline: none;
     box-shadow: none;
@@ -23,7 +22,6 @@
 img {
     pointer-events: none;
 }
-        
         body {
             font-family: Arial, sans-serif;
             background-color: #181818;
@@ -44,7 +42,30 @@ img {
             border-radius: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
+        .option-group {
+            text-align: left;
+            margin: 15px 0;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .option input {
+            margin-right: 10px;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #FFFFFF;
+            border-radius: 50%;
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .option input:checked {
+            background-color: #2D83EC;
+            border-color: #2D83EC;
+        }
         textarea, input, button {
             width: 90%;
             margin: 10px auto;
@@ -78,63 +99,21 @@ img {
             margin-bottom: 20px;
             color: #2D83EC;
         }
-        .dropdown {
-            position: relative;
-            width: 90%;
-            margin: 10px auto;
-        }
-        .dropdown-button {
-            width: 100%;
-            padding: 10px;
-            background-color: #1c1c1c;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 30px;
-            font-size: 13px;
-            text-align: left;
-            cursor: pointer;
-            outline: none;
-            transition: background-color 0.3s ease;
-        }
-        .dropdown-button:hover {
-            background-color: #2D83EC;
-        }
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #1c1c1c;
-            border-radius: 30px;
-            border-bottom: 1px solid #808080;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            z-index: 100;
-            display: none;
-        }
-        .dropdown-menu.active {
-            display: block;
-        }
-        .dropdown-item {
-            padding: 10px;
-            color: #FFFFFF;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .dropdown-item:hover {
-            background-color: #2D83EC;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Feedback & Suggestions</h2>
-        <div class="dropdown">
-            <button class="dropdown-button" id="dropdownButton">Select Message Type</button>
-            <div class="dropdown-menu" id="dropdownMenu">
-                <div class="dropdown-item" onclick="selectOption('Complaint')">Complaint</div>
-                <div class="dropdown-item" onclick="selectOption('Suggestion')">Suggestion</div>
-            </div>
+        <p>Select the type of support:</p>
+        <div class="option-group">
+            <label class="option">
+                <input type="radio" name="messageType" value="Complaint">
+                Complaint
+            </label>
+            <label class="option">
+                <input type="radio" name="messageType" value="Suggestion">
+                Suggestion
+            </label>
         </div>
         <textarea id="message" placeholder="Enter your feedback or suggestion here..."></textarea>
         <input id="username" type="text" placeholder="Telegram Username" disabled>
@@ -152,33 +131,14 @@ img {
         document.getElementById("username").value = userData.username || "Not available";
         document.getElementById("userId").value = userData.id || "Not available";
 
-        // Dropdown menu logic
-        const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-
-        dropdownButton.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('active');
-        });
-
-        function selectOption(option) {
-            dropdownButton.textContent = option;
-            dropdownMenu.classList.remove('active');
-        }
-
-        window.addEventListener('click', (e) => {
-            if (!e.target.closest('.dropdown')) {
-                dropdownMenu.classList.remove('active');
-            }
-        });
-
         // Send message function
         function sendMessage() {
             const message = document.getElementById("message").value.trim();
-            const messageType = dropdownButton.textContent;
+            const messageType = document.querySelector('input[name="messageType"]:checked');
             const username = userData.username || "Not available";
             const userId = userData.id;
 
-            if (!message || messageType === "Select Message Type") {
+            if (!message || !messageType) {
                 tg.showAlert("Please select a message type and enter your feedback.");
                 return;
             }
@@ -186,7 +146,7 @@ img {
             const botToken = "7645890661:AAEwfvZjaQPmyf181QYTRZ-kEQgluG-rPrQ"; // Replace with your bot token
             const adminId = "6793556284";  // Replace with the admin chat ID
 
-            const text = `Message Type: ${messageType}\n`
+            const text = `Message Type: ${messageType.value}\n`
                 + `User ID: ${userId}\n`
                 + `Username: @${username}\n\n`
                 + `Message:\n${message}`;
