@@ -43,29 +43,33 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .option-group {
-            text-align: left;
-            margin: 15px 0;
-        }
-        .option {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-        }
-        .option input {
-            margin-right: 10px;
-            appearance: none;
-            width: 8px;
-            height: 8px;
-            border: 2px solid #FFFFFF;
-            border-radius: 50%;
-            background-color: transparent;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .option input:checked {
-            background-color: #2D83EC;
-            border-color: #2D83EC;
-        }
+    text-align: left;
+    margin: 15px 0;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    flex-direction: row-reverse; /* جعل الكرات على اليسار */
+}
+
+.option input {
+    margin-left: 10px; /* تغيير المسافة إلى اليسار */
+    appearance: none;
+    width: 8px;
+    height: 8px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option input:checked {
+    background-color: #2D83EC;
+    border-color: #2D83EC;
+} 
         textarea, input, button {
             width: 90%;
             margin: 10px auto;
