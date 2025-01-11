@@ -31,16 +31,19 @@
             margin: 10px auto;
             padding: 10px;
             border-radius: 30px;
-            border: none;
+            border: 1px solid transparent;
             font-size: 13px;
+            background-color: #1c1c1c;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus, select:focus, input:focus {
+            border-color: #101010; /* اللون عند التحديد */
         }
         textarea {
             height: 100px;
             resize: none;
-        }
-        select, input {
-            background-color: #1c1c1c;
-            color: #fff;
         }
         button {
             background-color: #2D83EC;
@@ -56,15 +59,29 @@
             margin-bottom: 20px;
             color: #2D83EC;
         }
+        .select-container {
+            position: relative;
+        }
+        .select-container::after {
+            content: '▼';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: #ccc;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Feedback & Suggestions</h2>
-        <select id="messageType">
-            <option value="Complaint">Complaint</option>
-            <option value="Suggestion">Suggestion</option>
-        </select>
+        <div class="select-container">
+            <select id="messageType">
+                <option value="Complaint">Complaint</option>
+                <option value="Suggestion">Suggestion</option>
+            </select>
+        </div>
         <textarea id="message" placeholder="Enter your feedback or suggestion here..."></textarea>
         <input id="username" type="text" placeholder="Telegram Username" disabled>
         <input id="userId" type="text" placeholder="Telegram ID" disabled>
