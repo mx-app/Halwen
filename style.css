@@ -1,58 +1,65 @@
-        button, input, select, textarea, img, a {
-         outline: none;
-         box-shadow: none;
-         border: none;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-      }
+/* إزالة التأثيرات الافتراضية */
+button, input, select, textarea, img, a {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 
-      * {
-        -webkit-tap-highlight-color: transparent;
-      }
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 
-      img {
-        pointer-events: none;
-       }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #181818;
-            color: #FFFFFF;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 15px;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            max-width: 350px;
-            width: 85%;
-            padding: 15px;
-            background-color: #101010;
-            border-radius: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .option-group {
-    text-align: center; /* لضمان النصوص في الوسط */
+img {
+    pointer-events: none;
+}
+
+/* تصميم الجسم */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #181818;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* تصميم الحاوية الأساسية */
+.container {
+    text-align: center;
+    max-width: 350px;
+    width: 85%;
+    padding: 15px;
+    background-color: #101010;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* تصميم خيارات النوع */
+.option-group {
+    text-align: center;
     margin: 10px 0;
     display: flex;
-    justify-content: center; /* تمركز العناصر في المنتصف أفقياً */
-    gap: 20px; /* المسافة بين الخيارات */
+    justify-content: center;
+    gap: 20px;
 }
 
 .option {
     display: flex;
     align-items: center;
-    gap: 5px; /* المسافة بين دائرة الاختيار والنص */
+    gap: 5px;
 }
 
 .option input {
     appearance: none;
-    width: 7px; /* حجم الدائرة */
-    height: 7px; /* حجم الدائرة */
+    width: 7px;
+    height: 7px;
     border: 2px solid #808080;
     border-radius: 50%;
     background-color: transparent;
@@ -64,40 +71,123 @@
     background-color: #2D83EC;
     border-color: #2D83EC;
 }
- 
-        textarea, input, button {
-            width: 90%;
-            margin: 10px auto;
-            padding: 10px;
-            border-radius: 30px;
-            border: 1px solid transparent;
-            font-size: 15px;
-            background-color: #1c1c1c;
-            color: #fff;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-        textarea:focus, input:focus {
-            border-color: #808080;
-        }
-        textarea {
-            height: 100px;
-            resize: none;
-        }
-        button {
-            background-color: #2D83EC;
-            color: #FFFFFF;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #1E2337;
-        }
-        h2 {
-            margin-bottom: 20px;
-            color: #2D83EC;
-        }
-        p {
-            text-align: left; /* محاذاة النص لليمين */
-        }
+
+/* تصميم الحقول النصية والأزرار */
+textarea, input, button {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    font-size: 15px;
+    background-color: #1c1c1c;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus, input:focus {
+    border-color: #808080;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+button {
+    background-color: #2D83EC;
+    color: #FFFFFF;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1E2337;
+}
+
+/* تصميم العناوين */
+h2 {
+    margin-bottom: 20px;
+    color: #2D83EC;
+}
+
+/* تصميم النصوص */
+p {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* تصميم الأسئلة (FAQ) */
+.faq-container {
+    margin-top: 20px;
+    width: 90%;
+    padding: 15px;
+    background-color: #1c1c1c;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+}
+
+.faq-container h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #2D83EC;
+    text-align: center;
+}
+
+.faq-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.faq-container li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #101010;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.faq-container li:hover {
+    background-color: #2D83EC;
+    color: #FFFFFF;
+}
+
+.faq-container li strong {
+    display: block;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+}
+
+.faq-container li p {
+    font-size: 14px;
+    color: #BBBBBB;
+    margin: 0;
+}
+
+/* تأثير الفوكس على العناصر */
+textarea:focus, input:focus, button:focus {
+    outline: none;
+    border-color: #2D83EC;
+}
+
+/* تأثير زر الإرسال */
+button:active {
+    background-color: #142850;
+}
+
+/* وسائط العرض الصغيرة */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    .container, .faq-container {
+        width: 95%;
+    }
+    button, input, textarea {
+        font-size: 14px;
+    }
+}
