@@ -45,20 +45,20 @@
         .option-group {
     text-align: left;
     margin: 10px 0;
+    display: flex;
+    gap: 20px; /* المسافة بين الخيارات */
 }
 
 .option {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
-    gap: 200px; 
+    gap: 5px; /* المسافة بين دائرة الاختيار والنص */
 }
 
 .option input {
     appearance: none;
-    width: 8px;
-    height: 8px;
+    width: 12px; /* حجم الدائرة */
+    height: 12px; /* حجم الدائرة */
     border: 2px solid #FFFFFF;
     border-radius: 50%;
     background-color: transparent;
@@ -69,7 +69,8 @@
 .option input:checked {
     background-color: #2D83EC;
     border-color: #2D83EC;
-} 
+}
+ 
         textarea, input, button {
             width: 90%;
             margin: 10px auto;
@@ -112,13 +113,14 @@
     <div class="container">
         <h2>Feedback & Suggestions</h2>
       <div class="option-group">
-           <label class="option"> Complaint
-           <input type="radio" name="messageType" value="Complaint">
-       </label>
-       <label class="option"> Suggestion
-           <input type="radio" name="messageType" value="Suggestion">
+        <label class="option">
+          <input type="radio" name="messageType" value="Complaint"> Complaint
         </label>
-     </div>
+        <label class="option">
+           <input type="radio" name="messageType" value="Suggestion"> Suggestion
+        </label>
+      </div>
+
         <textarea id="message" placeholder="Enter your feedback or suggestion here..."></textarea>
         <input id="username" type="text" placeholder="Telegram Username" disabled>
         <input id="userId" type="text" placeholder="Telegram ID" disabled>
